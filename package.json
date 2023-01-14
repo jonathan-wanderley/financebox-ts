@@ -1,0 +1,19 @@
+{
+  "name": "financebox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonathan-wanderley/financebox-js.git"
+  },
+  "author": "Jonathan Wanderley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonathan-wanderley/financebox-js/issues"
+  },
+  "homepage": "https://github.com/jonathan-wanderley/financebox-js#readme"
+}
