@@ -11,12 +11,26 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  password  String
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  password     String
+  transactions Transaction[]
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   @@map("users")
+}
+
+model Transaction {
+  id        String   @id @default(uuid())
+  name      String
+  value     Decimal
+  date      DateTime
+  user      User     @relation(fields: [user_id], references: [id])
+  user_id   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("transactions")
 }
