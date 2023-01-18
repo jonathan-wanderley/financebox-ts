@@ -1,9 +1,8 @@
 import { Router, Request, Response } from "express";
+import userRoutes from "./user";
 
 const routes = Router();
 
-routes.get('/', (req: Request, res: Response) => {
-    res.json({ ok: true })
-});
+routes.use(userRoutes);
 
 export default routes;
