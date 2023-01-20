@@ -1,5 +1,5 @@
-import UserRepository from "../../repositories/user";
-import AppError from "../../utils/AppError";
+import UserRepository from "../repositories/user";
+import AppError from "../utils/AppError";
 import bcript from "bcryptjs";
 
 interface ICreateUser {

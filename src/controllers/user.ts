@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import CreateUser from "../usecases/user/CreateUser";
-import GetUserList from "../usecases/user/GetUserList";
+import CreateUser from "../usecases/CreateUser";
+import GetUserList from "../usecases/GetUserList";
 
 async function getList(req: Request, res: Response) {
     const userList = await GetUserList();
