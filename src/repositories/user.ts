@@ -11,7 +11,7 @@ async function getByEmail(email: string) {
         where: {
             email
         }
-    })
+    });
 }
 
 async function create(name: string, email: string, password: string) {
@@ -21,11 +21,20 @@ async function create(name: string, email: string, password: string) {
             email,
             password
         }
-    })
+    });
+}
+
+async function destroy(id: string) {
+    await prisma.user.delete({
+        where: {
+            id
+        }
+    });
 }
 
 export default {
     getAll,
     getByEmail,
-    create
+    create,
+    destroy,
 }
