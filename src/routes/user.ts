@@ -1,12 +1,8 @@
-import { PrismaClient } from "@prisma/client";
-import { Request, Response, Router } from "express";
+import { Router } from "express";
+import UserController from "../controllers/user";
 
 const routes = Router();
-const prisma = new PrismaClient();
 
-routes.get('/users', async (req: Request, res: Response) => {
-    const userList = await prisma.user.findMany();
-    return res.json(userList);
-});
+routes.get('/users', UserController.getList);
 
 export default routes;
