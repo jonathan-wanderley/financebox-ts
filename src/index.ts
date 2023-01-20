@@ -1,4 +1,4 @@
-import Express from "express";
+import Express, { urlencoded } from "express";
 import "dotenv/config";
 import cors from "cors";
 import routes from "./routes";
@@ -7,6 +7,7 @@ const app = Express();
 const port = process.env.PORT;
 
 app.use(cors);
+app.use(Express.json());
 app.use(routes);
 
 app.listen(port, () => {
