@@ -6,6 +6,14 @@ async function getAll() {
     return await prisma.user.findMany();
 }
 
+async function getById(id: string) {
+    return await prisma.user.findFirst({
+        where: {
+            id
+        }
+    });
+}
+
 async function getByEmail(email: string) {
     return await prisma.user.findUnique({
         where: {
@@ -37,4 +45,5 @@ export default {
     getByEmail,
     create,
     destroy,
+    getById,
 }
