@@ -1,5 +1,5 @@
-import UserRepository from "../repositories/user";
-import AppError from "../utils/AppError";
+import UserRepository from "../../repositories/user";
+import AppError from "../../utils/AppError";
 import bcript from "bcryptjs";
 
 interface ICreateUser {
@@ -8,7 +8,7 @@ interface ICreateUser {
     password: string;
 }
 
-export default async function CreateUser(userData: ICreateUser) {
+export async function RegisterUser(userData: ICreateUser) {
     const { name, email, password } = userData;
     
     const hasUser = await UserRepository.getByEmail(email);

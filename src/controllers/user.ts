@@ -1,27 +1,23 @@
 import { Request, Response } from "express";
-import CreateUser from "../usecases/CreateUser";
-import DeleteUser from "../usecases/DeleteUser";
-import GetUserById from "../usecases/GetUserById";
-import GetUserList from "../usecases/GetUserList";
-import AuthUser from "../usecases/AuthUser";
+import * as userUsecase from "../usecases/user";
 
 async function getList(req: Request, res: Response) {
-    const userList = await GetUserList();
+    const userList = await userUsecase.GetUserList();
     return res.json(userList);
 }
 
 async function getById(req: Request, res: Response) {
     const { id } = req.params;
 
-    const user = await GetUserById(id);
+    const user = await userUsecase.GetUserById(id);
 
     return res.json(user);
 }
 
-async function create(req: Request, res: Response) {
+async function register(req: Request, res: Response) {
     const { name, email, password } = req.body;
     
-    const newUser = await CreateUser({
+    const newUser = await userUsecase.RegisterUser({
         name,
         email,
         password
@@ -33,7 +29,7 @@ async function create(req: Request, res: Response) {
 async function destroy(req: Request, res: Response) {
     const { id } = req.params;
 
-    await DeleteUser(id);
+    await userUsecase.DeleteUser(id);
 
     return res.status(204).json();
 }
@@ -41,14 +37,14 @@ async function destroy(req: Request, res: Response) {
 async function auth(req: Request, res: Response) {
     const { email, password } = req.body;
 
-    const response = await AuthUser({ email, password });
+    const response = await userUsecase.AuthUser({ email, password });
 
     return res.json(response);
 }
 
 export default {
     getList,
-    create,
+    register,
     destroy,
     getById,
     auth,
