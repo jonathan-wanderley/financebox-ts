@@ -3,6 +3,7 @@ import CreateUser from "../usecases/CreateUser";
 import DeleteUser from "../usecases/DeleteUser";
 import GetUserById from "../usecases/GetUserById";
 import GetUserList from "../usecases/GetUserList";
+import AuthUser from "../usecases/AuthUser";
 
 async function getList(req: Request, res: Response) {
     const userList = await GetUserList();
@@ -37,9 +38,18 @@ async function destroy(req: Request, res: Response) {
     return res.status(204).json();
 }
 
+async function auth(req: Request, res: Response) {
+    const { email, password } = req.body;
+
+    const response = await AuthUser({ email, password });
+
+    return res.json(response);
+}
+
 export default {
     getList,
     create,
     destroy,
     getById,
+    auth,
 }
