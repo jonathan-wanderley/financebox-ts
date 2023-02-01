@@ -10,6 +10,6 @@ routes.get('/users/:id', UserController.getById);
 routes.post('/users', UserValidator.createUserValidator, UserController.register);
 routes.delete('/users/:id', UserController.destroy);
 
-routes.post('/auth', UserController.auth);
+routes.post('/auth', UserValidator.AuthUserValidator, UserController.auth);
 
 export default routes;
