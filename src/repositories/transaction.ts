@@ -30,7 +30,16 @@ async function getByUser(id: string) {
     });
 }
 
+async function getTransactionById(id: string) {
+    return await prisma.transaction.findFirst({
+        where: {
+            id,
+        }
+    })
+}
+
 export default {
     add,
     getByUser,
+    getTransactionById,
 }

@@ -25,7 +25,17 @@ async function getByUser(req: Request, res: Response) {
     return res.json(userTransactions);
 }
 
+async function getTransactionById(req: Request, res: Response) {
+    const { id: userId } = req.user as User;
+    const { id: transactionId } = req.params;
+
+    const userTransaction = await TransactionUsecase.GetTransactionById(userId, transactionId);
+
+    return res.json(userTransaction);
+}
+
 export default {
     add,
     getByUser,
+    getTransactionById,
 }
