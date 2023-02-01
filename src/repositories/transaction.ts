@@ -22,6 +22,15 @@ async function add(transaction: TransactionDTO) {
     })
 }
 
+async function getByUser(id: string) {
+    return await prisma.transaction.findMany({
+        where: {
+            user_id: id
+        }
+    });
+}
+
 export default {
     add,
+    getByUser,
 }
