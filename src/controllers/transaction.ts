@@ -34,8 +34,18 @@ async function getTransactionById(req: Request, res: Response) {
     return res.json(userTransaction);
 }
 
+async function destroy(req: Request, res: Response) {
+    const { id: userId } = req.user as User;
+    const { id: transactionId } = req.params;
+
+    await TransactionUsecase.DeleteTransaction(userId, transactionId);
+
+    return res.status(204).json();
+}
+
 export default {
     add,
     getByUser,
     getTransactionById,
+    destroy,
 }

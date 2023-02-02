@@ -38,8 +38,17 @@ async function getTransactionById(id: string) {
     })
 }
 
+async function destroy(id: string) {
+    await prisma.transaction.delete({
+        where: {
+            id,
+        }
+    })
+}
+
 export default {
     add,
     getByUser,
     getTransactionById,
+    destroy,
 }
