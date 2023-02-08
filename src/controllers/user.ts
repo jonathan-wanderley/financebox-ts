@@ -37,9 +37,10 @@ async function update(req: Request, res: Response) {
 }
 
 async function destroy(req: Request, res: Response) {
-    const { id } = req.params;
+    const { id: userToDelete } = req.params;
+    const { id: userId } = req.user as User;
 
-    await userUsecase.DeleteUser(id);
+    await userUsecase.DeleteUser(userId, userToDelete);
 
     return res.status(204).json();
 }
