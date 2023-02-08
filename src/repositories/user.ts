@@ -32,6 +32,21 @@ async function create(name: string, email: string, password: string) {
     });
 }
 
+interface UpdateUserDTO {
+    name?: string;
+    email?: string;
+    password?: string;
+}
+
+async function update(id: string, userData: UpdateUserDTO) {
+    return await prisma.user.update({
+        where: {
+            id,
+        },
+        data: userData,
+    })  
+}
+
 async function destroy(id: string) {
     await prisma.user.delete({
         where: {
@@ -44,6 +59,7 @@ export default {
     getAll,
     getByEmail,
     create,
+    update,
     destroy,
     getById,
 }

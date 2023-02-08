@@ -26,6 +26,16 @@ async function register(req: Request, res: Response) {
     return res.json(newUser);
 }
 
+async function update(req: Request, res: Response) {
+    const { name, email, password } = req.body;
+    const { id } = req.params;
+    const { id: userId } = req.user as User;
+
+    const userUpdated = await userUsecase.UpdateUser(userId, { id, name, email, password });
+
+    return res.json(userUpdated);
+}
+
 async function destroy(req: Request, res: Response) {
     const { id } = req.params;
 
@@ -43,9 +53,10 @@ async function auth(req: Request, res: Response) {
 }
 
 export default {
+    getById,
     getList,
     register,
+    update,
     destroy,
-    getById,
     auth,
 }
