@@ -9,6 +9,15 @@ interface IUpdateUser {
     password?: string;
 }
 
+interface ResponseUserData {
+    id: string;
+    name: string;
+    email: string;
+    password?: string;
+    created_at: Date;
+    updated_at: Date;
+}
+
 export async function UpdateUser(userId: string, userData: IUpdateUser) {
     const { id: sentId, name, email, password } = userData;
 
@@ -28,5 +37,8 @@ export async function UpdateUser(userId: string, userData: IUpdateUser) {
         userData.password = hashedPassword;
     }
     
-    return await UserRepository.update(userId, userData); 
+    const updatedUser: ResponseUserData = await UserRepository.update(userId, userData); 
+    delete updatedUser.password;
+
+    return updatedUser;
 }

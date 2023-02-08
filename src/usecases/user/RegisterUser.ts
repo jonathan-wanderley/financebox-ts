@@ -8,6 +8,15 @@ interface ICreateUser {
     password: string;
 }
 
+interface ResponseUserData {
+    id: string;
+    name: string;
+    email: string;
+    password?: string;
+    created_at: Date;
+    updated_at: Date;
+}
+
 export async function RegisterUser(userData: ICreateUser) {
     const { name, email, password } = userData;
     
@@ -17,7 +26,9 @@ export async function RegisterUser(userData: ICreateUser) {
     }
 
     const hashedPassword = bcript.hashSync(password, 10);
-    const newUser = await UserRepository.create(name, email, hashedPassword);
+    
+    const newUser: ResponseUserData = await UserRepository.create(name, email, hashedPassword);
+    delete newUser.password;
 
     return newUser;
 }
