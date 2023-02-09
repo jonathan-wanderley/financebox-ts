@@ -1,15 +1,9 @@
 import { PrismaClient } from "@prisma/client";
+import { AddTransactionDTO } from "./dtos/transaction";
 
 const prisma = new PrismaClient();
 
-interface TransactionDTO {
-    name: string;
-    value: number;
-    date: Date;
-    userId: string;
-}
-
-async function add(transaction: TransactionDTO) {
+async function add(transaction: AddTransactionDTO) {
     const { name, value, date, userId: user_id } = transaction;
 
     return await prisma.transaction.create({

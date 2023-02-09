@@ -37,7 +37,8 @@ export async function UpdateUser(userId: string, userData: IUpdateUser) {
         userData.password = hashedPassword;
     }
     
-    const updatedUser: ResponseUserData = await UserRepository.update(userId, userData); 
+    const updatedUser: ResponseUserData = await UserRepository.update({ id: userId, name, email, password: userData.password }); 
+    
     delete updatedUser.password;
 
     return updatedUser;

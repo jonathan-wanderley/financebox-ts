@@ -3,13 +3,9 @@ import UserRepository from "../../repositories/user";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import ENV from "../../config/env";
+import { LoginUserDTO } from "./dtos/loginUserDTO";
 
-interface LoginDTO {
-    email: string;
-    password: string;
-}
-
-export async function AuthUser({ email, password: userPass }: LoginDTO) {
+export async function AuthUser({ email, password: userPass }: LoginUserDTO) {
     const user = await UserRepository.getByEmail(email);
     if(!user) throw new AppError(400, "Credenciais invalidas");
 

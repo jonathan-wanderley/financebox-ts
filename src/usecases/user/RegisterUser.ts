@@ -1,23 +1,10 @@
 import UserRepository from "../../repositories/user";
 import AppError from "../../utils/AppError";
 import bcript from "bcryptjs";
+import { RegisterUserDTO } from "./dtos/registerUserDTO";
+import { RegisterUserReponseDTO } from "./dtos/registerUserResponseDTO";
 
-interface ICreateUser {
-    name: string;
-    email: string;
-    password: string;
-}
-
-interface ResponseUserData {
-    id: string;
-    name: string;
-    email: string;
-    password?: string;
-    created_at: Date;
-    updated_at: Date;
-}
-
-export async function RegisterUser(userData: ICreateUser) {
+export async function RegisterUser(userData: RegisterUserDTO) {
     const { name, email, password } = userData;
     
     const hasUser = await UserRepository.getByEmail(email);
@@ -27,7 +14,8 @@ export async function RegisterUser(userData: ICreateUser) {
 
     const hashedPassword = bcript.hashSync(password, 10);
     
-    const newUser: ResponseUserData = await UserRepository.create(name, email, hashedPassword);
+    const newUser: RegisterUserReponseDTO = await UserRepository.create({ name, email, password: hashedPassword });
+    
     delete newUser.password;
 
     return newUser;

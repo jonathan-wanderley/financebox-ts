@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { CreateUserDTO, UpdateUserDTO } from "./dtos/user";
 
 const prisma = new PrismaClient();
 
@@ -22,7 +23,7 @@ async function getByEmail(email: string) {
     });
 }
 
-async function create(name: string, email: string, password: string) {
+async function create({ name, email, password }: CreateUserDTO) {
     return await prisma.user.create({
         data: {
             name,
@@ -32,18 +33,16 @@ async function create(name: string, email: string, password: string) {
     });
 }
 
-interface UpdateUserDTO {
-    name?: string;
-    email?: string;
-    password?: string;
-}
-
-async function update(id: string, userData: UpdateUserDTO) {
+async function update({ id, name, email, password }: UpdateUserDTO) {
     return await prisma.user.update({
         where: {
             id,
         },
-        data: userData,
+        data: {
+            name,
+            email,
+            password,
+        },
     })  
 }
 
